@@ -1,0 +1,18 @@
+README: shell 2
+
+Known Bugs:
+There are no bugs in my program to the best of my knowledge.
+
+Fixed Errors:
+In my shell 1, entering a command consisting only of whitespace was resulting
+in the printing of an error message saying "Error- No command". However, upon
+inspection of the demo, I realized that such a command should not result in the 
+printing of any message; instead the prompt should be printed on the following
+line. I fixed this in my shell 2.
+
+Important Points:
+I made frequent use of waitpid in my program. One thing I'd like to highlight
+is that when calling functions in jobs.c which required a job process ID as an argument, (such as get_job_jid), I simply used the process ID of the child, as I knew that in this assignment, the two would always be the same. This is because i call setpgid(0, 0) inside my fork, which means that every child process gets assigned a job id that is numerically equal to its process ID (because I pass in 2 0s to setpgid). Evading frequent calls to get_job_jid (a method that potentially traverses the whole jobs list), I figured, would improve the runtime of my program. Nonetheless, I did use getpgid(getpid()) instead of just getpid() a few times, most notably when initializing my global variable that holds the original pgid of the shell, to show my understanding that pid and gpid are not necessarily the same, even though in the case of this project they are. So this was done on purpose, with regards to runtime efficiency. For a more complete description of my program, please see my extensive comments.
+
+Collaboration:
+cderman.
